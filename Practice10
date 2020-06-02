@@ -1,0 +1,298 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Practice1 {
+
+	public static void main(String[] args) throws IOException {
+		String tmp, inst;
+		FileReader in = null;
+		FileWriter out = null;
+		int c;
+		long start=0,end=0;
+		
+		Scanner s = new Scanner(System.in);
+		tmp = s.nextLine();
+
+		inst = tmp.split(" ")[0].toUpperCase();
+		if (inst.equals("COPY")) {
+			try {
+				in = new FileReader(tmp.split(" ")[1]);
+				out = new FileWriter(tmp.split(" ")[2]); 
+				
+				start = System.currentTimeMillis();
+				while ((c = in.read()) != -1) {
+					out.write(c);
+				}
+				end = System.currentTimeMillis();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if (in != null)
+					in.close(); 
+
+				if (out != null)
+					out.close();
+			}
+		}
+		System.out.println("���� �ð�: "+(end-start)/1000+"."+(end-start)%1000+"(s)");
+	}
+}
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Practice2{
+	public static void main(String args[]) throws IOException {
+		String tmp, inst;
+		FileInputStream in = null;
+		FileOutputStream out = null;
+		int c;
+		long start=0,end=0;
+		
+		Scanner s = new Scanner(System.in);
+		tmp = s.nextLine();
+
+		inst = tmp.split(" ")[0].toUpperCase();
+		if (inst.equals("COPY")) {
+			try {
+				in = new FileInputStream(tmp.split(" ")[1]);
+				out = new FileOutputStream(tmp.split(" ")[2]);
+				
+				start = System.currentTimeMillis();
+				while ((c = in.read()) != -1) {
+					out.write(c);
+				}
+				end = System.currentTimeMillis();
+
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			} 
+			finally {
+				if (in != null)
+					in.close();
+				if (out != null)
+					out.close();
+				}
+		}
+		System.out.println("���� �ð�: "+(end-start)/1000+"."+(end-start)%1000+"(s)");
+	}
+}
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Scanner;
+
+public class Practice3{
+	public static void main(String args[]) throws IOException {
+		String tmp, inst;
+		BufferedInputStream in = null;
+		BufferedOutputStream out = null;
+
+		int c;
+		long start=0,end=0;
+		
+		Scanner s = new Scanner(System.in);
+		tmp = s.nextLine();
+
+		inst = tmp.split(" ")[0].toUpperCase();
+		if (inst.equals("COPY")) {
+			try {
+				in = new BufferedInputStream(new FileInputStream(tmp.split(" ")[1]), 10000);
+				out = new BufferedOutputStream(new FileOutputStream(tmp.split(" ")[2]), 10000);
+				
+				start = System.currentTimeMillis();
+				while ((c = in.read()) != -1) {
+					out.write(c);
+				}
+				end = System.currentTimeMillis();
+
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			} 
+			finally {
+				if (in != null)
+					in.close();
+				if (out != null)
+					out.close();
+				}
+		}
+		System.out.println("���� �ð�: "+(end-start)/1000+"."+(end-start)%1000+"(s)");
+	}
+}
+
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.Scanner;
+
+public class Practice4 {
+	public static void main(String args[]) throws IOException {
+		String tmp, inst;
+		FileInputStream in = null;
+		FileOutputStream out = null;
+		int c;
+		long start = 0, end = 0;
+		ByteBuffer buf = ByteBuffer.allocate(1024*10);
+
+		Scanner s = new Scanner(System.in);
+		tmp = s.nextLine();
+
+		inst = tmp.split(" ")[0].toUpperCase();
+		if (inst.equals("COPY")) {
+			try {
+				in = new FileInputStream(tmp.split(" ")[1]);
+				out = new FileOutputStream(tmp.split(" ")[2]);
+				
+				start = System.currentTimeMillis();
+				while ((c=(in.read(buf.array()))) != -1) {
+					out.write(buf.array(), 0, c);
+				}
+				end = System.currentTimeMillis();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if (in != null)
+					in.close();
+				if (out != null)
+					out.close();
+			}
+		}
+		System.out.println("���� �ð�: " + (end - start) / 1000 + "."
+				+ (end - start) % 1000 + "(s)");
+	}
+}
+
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.Scanner;
+
+public class Practice5 {
+	public static void main(String args[]) throws IOException {
+		String tmp, inst;
+		BufferedInputStream in = null;
+		BufferedOutputStream out = null;
+		int c;
+		long start = 0, end = 0;
+		ByteBuffer buf = ByteBuffer.allocate(1024*10);
+
+		Scanner s = new Scanner(System.in);
+		tmp = s.nextLine();
+
+		inst = tmp.split(" ")[0].toUpperCase();
+		if (inst.equals("COPY")) {
+			try {
+				in = new BufferedInputStream(new FileInputStream(tmp.split(" ")[1]));
+				out = new BufferedOutputStream(new FileOutputStream(tmp.split(" ")[2]));
+				
+				start = System.currentTimeMillis();
+				while ((c=(in.read(buf.array()))) != -1) {
+					out.write(buf.array(), 0, c);
+				}
+				end = System.currentTimeMillis();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if (in != null)
+					in.close();
+				if (out != null)
+					out.close();
+			}
+		}
+		System.out.println("���� �ð�: " + (end - start) / 1000 + "."
+				+ (end - start) % 1000 + "(s)");
+	}
+}
+import javax.swing.*;
+import java.awt.*;
+public class Practice6 extends JFrame{
+	public Practice6() {
+		
+		setTitle("(�Խ���)Practice6");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout(FlowLayout.LEFT));
+		c.add(new JButton("��ư"));
+		
+		
+		ImageIcon cherryIcon = new ImageIcon("images/cherry.jpg");
+		JCheckBox apple = new JCheckBox("����");
+		JCheckBox pear = new JCheckBox("��",true);
+		JCheckBox cherry = new JCheckBox("ü��",cherryIcon);
+		
+		c.add(apple);
+		c.add(pear);
+		c.add(cherry);
+		
+		ButtonGroup g = new ButtonGroup();
+		JRadioButton apple1 =  new JRadioButton("����");
+		JRadioButton pear1 =  new JRadioButton("��",true);
+		JRadioButton cherry1 =  new JRadioButton("ü��",cherryIcon);
+		g.add(apple1);
+		g.add(pear1);
+		g.add(cherry1);
+		
+		c.add(apple1);
+		c.add(pear1);
+		c.add(cherry1);
+		
+		JSlider slider = new JSlider(JSlider.HORIZONTAL,0,200,100);
+		slider.setMajorTickSpacing(50);
+		c.add(slider);
+		
+		c.add(new JLabel(" �̸�"));
+		c.add(new JTextField(""));
+		c.add(new JLabel(" �й�"));
+		c.add(new JTextField(""));
+		c.add(new JLabel(" �а�"));
+		c.add(new JTextField(""));
+		c.add(new JLabel(" ����"));
+		c.add(new JTextField(""));
+
+		
+		JPasswordField password = new JPasswordField();
+		add(password);
+
+		String [] name = {"january"};
+		SpinnerListModel listModel = new SpinnerListModel(name);
+		c.add(new JSpinner(listModel));
+
+		c.add(new JTextArea("hello",7,20));
+		
+		String [] fruits = {"apple","banana","kiwi"};
+		String [] names = {"kitea","jeamon"};
+		JComboBox<String> strCombo = new 	JComboBox<String>(fruits);
+		c.add(strCombo);
+		JComboBox<String> nameCombo = new 	JComboBox<String>(names);
+		c.add(nameCombo);
+	
+		 JList<String> strList = new JList<String>(fruits);
+		 c.add(strList);
+		 JList<String> nameList = new JList<String>(fruits);
+		 c.add(nameList);
+		
+		
+		setSize(300,200);
+		setVisible(true);
+	}
+	public static void main(String [] agrs) {
+		new Practice6();
+	}
+}
